@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给特别的人❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            min-height: 100vh;
+            font-family: 'Microsoft YaHei', cursive;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .heart {
+            color: #ff3860;
+            font-size: 4em;
+            animation: pulse 1.5s infinite;
+        }
+
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 20px 0;
+            font-size: 2.5em;
+        }
+
+        .message {
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin: 20px 0;
+            line-height: 1.8;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        button {
+            background: #ff7aa8;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #ff6090;
+            transform: scale(1.05);
+        }
+
+        .hidden-message {
+            display: none;
+            margin-top: 30px;
+            font-size: 1.3em;
+            color: #ff3860;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .petals {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .petal {
+            position: absolute;
+            background: rgba(255,255,255,0.6);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .message {
+                padding: 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="petals" id="petals"></div>
+    
+    <div class="container">
+        <div class="heart">❤️</div>
+        <h1>亲爱的圈圈</h1>
+        
+        <div class="message">
+            <p>初见如暖阳，温润我胸膛</p>
+            <p>每次和你聊天，时间总是过得特别快，舍不得说再见...</p>
+            <p>感觉见到你整个世界都变明亮</p>
+        </div>
+
+        <button onclick="showMessage()">请点我</button>
+        <div id="secretMessage" class="hidden-message">
+            圈圈是全世界最好的女孩<br>
+            <span style="font-size:1.5em;">❤️🌹</span>
+        </div>
+    </div>
+
+    <script>
+        // 创建花瓣动画
+        function createPetals() {
+            const petalsContainer = document.getElementById('petals');
+            for(let i = 0; i < 15; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.width = Math.random() * 15 + 5 + 'px';
+                petal.style.height = petal.style.width;
+                petal.style.animationDuration = Math.random() * 3 + 5 + 's';
+                petal.style.animationDelay = Math.random() * 5 + 's';
+                petalsContainer.appendChild(petal);
+            }
+        }
+
+        // 显示隐藏信息
+        function showMessage() {
+            document.getElementById('secretMessage').style.display = 'block';
+            // 添加爱心动画
+            for(let i = 0; i < 10; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'absolute';
+                heart.style.left = Math.random() * 80 + 10 + '%';
+                heart.style.animation = `float ${Math.random()*2 + 3}s ease-out`;
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+
+        // 初始化花瓣
+        createPetals();
+
+        // 页面加载动画
+        setTimeout(() => {
+            document.body.style.opacity = 1;
+        }, 100);
+        document.body.style.opacity = 0;
+        document.body.style.transition = 'opacity 1s';
+    </script>
+</body>
+</html>
